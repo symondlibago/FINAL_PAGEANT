@@ -168,11 +168,11 @@ const JudgeDashboard = () => {
                 <p className="text-sm text-white/80">Welcome, {user?.name}</p>
               </div>
             </div>
-            <Button 
-              variant="outline" 
-              size="sm" 
+            <Button
+              variant="outline"
+              size="sm"
               onClick={logout}
-              className="border-white/40 text-white hover:bg-white/20 hover:text-white"
+              className="bg-transparent text-white border-white hover:bg-white hover:text-black"
             >
               <LogOut className="h-4 w-4 mr-2" />
               Logout

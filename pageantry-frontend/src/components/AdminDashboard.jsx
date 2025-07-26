@@ -148,14 +148,25 @@ const AdminDashboard = () => {
               </div>
             </div>
             <div className="flex items-center space-x-2">
-              <Button variant="outline" size="sm" className="border-white/40 text-white hover:bg-white/20 hover:text-white">
-                <Settings className="h-4 w-4 mr-2" />
-                Settings
-              </Button>
-              <Button variant="outline" size="sm" onClick={logout} className="border-white/40 text-white hover:bg-white/20 hover:text-white">
-                <LogOut className="h-4 w-4 mr-2" />
-                Logout
-              </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="bg-transparent text-white border-white hover:bg-white hover:text-black"
+            >
+              <Settings className="h-4 w-4 mr-2" />
+              Settings
+            </Button>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={logout}
+              className="bg-transparent text-white border-white hover:bg-white hover:text-black"
+            >
+              <LogOut className="h-4 w-4 mr-2" />
+              Logout
+            </Button>
+
             </div>
           </div>
         </div>
@@ -265,7 +276,7 @@ const AdminDashboard = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {candidates.map((candidate) => (
+                    {candidates.map((candidate, index) => (
                       <TableRow key={candidate.id}>
                         <TableCell>
                           <Avatar className="h-10 w-10">
@@ -276,7 +287,7 @@ const AdminDashboard = () => {
                           </Avatar>
                         </TableCell>
                         <TableCell>
-                          <Badge variant="outline">#{candidate.candidate_number}</Badge>
+                          <Badge variant="outline">#{index + 1}</Badge>
                         </TableCell>
                         <TableCell className="font-medium">{candidate.name}</TableCell>
                         <TableCell className={getScoreColor(candidate.scores?.sports_attire)}>
@@ -312,6 +323,7 @@ const AdminDashboard = () => {
                       </TableRow>
                     ))}
                   </TableBody>
+
                 </Table>
               </CardContent>
             </Card>
@@ -349,48 +361,52 @@ const AdminDashboard = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {judges.map((judge) => (
-                      <TableRow key={judge.id}>
-                        <TableCell className="font-medium">{judge.name}</TableCell>
-                        <TableCell>{judge.email}</TableCell>
-                        <TableCell>
-                          <Badge variant={judge.is_active ? "default" : "secondary"}>
-                            {judge.is_active ? 'Active' : 'Inactive'}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>
-                          <div className="text-sm">
-                            {judge.progress?.sports_attire?.percentage || 0}%
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="text-sm">
-                            {judge.progress?.swimsuit?.percentage || 0}%
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="text-sm">
-                            {judge.progress?.gown?.percentage || 0}%
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="text-sm">
-                            {judge.progress?.qa?.percentage || 0}%
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex items-center space-x-2">
-                            <Button variant="ghost" size="sm">
-                              <Edit className="h-4 w-4" />
-                            </Button>
-                            <Button variant="ghost" size="sm">
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
+  {judges
+    .slice() // optional: avoid mutating original array
+    .sort((a, b) => a.id - b.id)
+    .map((judge) => (
+      <TableRow key={judge.id}>
+        <TableCell className="font-medium">{judge.name}</TableCell>
+        <TableCell>{judge.email}</TableCell>
+        <TableCell>
+          <Badge variant={judge.is_active ? "default" : "secondary"}>
+            {judge.is_active ? 'Active' : 'Inactive'}
+          </Badge>
+        </TableCell>
+        <TableCell>
+          <div className="text-sm">
+            {judge.progress?.sports_attire?.percentage || 0}%
+          </div>
+        </TableCell>
+        <TableCell>
+          <div className="text-sm">
+            {judge.progress?.swimsuit?.percentage || 0}%
+          </div>
+        </TableCell>
+        <TableCell>
+          <div className="text-sm">
+            {judge.progress?.gown?.percentage || 0}%
+          </div>
+        </TableCell>
+        <TableCell>
+          <div className="text-sm">
+            {judge.progress?.qa?.percentage || 0}%
+          </div>
+        </TableCell>
+        <TableCell>
+          <div className="flex items-center space-x-2">
+            <Button variant="ghost" size="sm">
+              <Edit className="h-4 w-4" />
+            </Button>
+            <Button variant="ghost" size="sm">
+              <Trash2 className="h-4 w-4" />
+            </Button>
+          </div>
+        </TableCell>
+      </TableRow>
+  ))}
+</TableBody>
+
                 </Table>
               </CardContent>
             </Card>
