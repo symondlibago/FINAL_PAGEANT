@@ -39,13 +39,14 @@ class CandidateController extends Controller
                 'id' => $candidate->id,
                 'candidate_number' => $candidate->candidate_number,
                 'name' => $candidate->name,
-                'image_url' => $candidate->image_url,
+                'image_url' => $candidate->image_url ? asset($candidate->image_url) : null,
                 'is_active' => $candidate->is_active,
                 'scores' => $candidate->getScoresBreakdown(),
                 'created_at' => $candidate->created_at,
                 'updated_at' => $candidate->updated_at,
             ];
         });
+        
 
         return response()->json([
             'success' => true,
@@ -114,7 +115,7 @@ class CandidateController extends Controller
                 'id' => $candidate->id,
                 'candidate_number' => $candidate->candidate_number,
                 'name' => $candidate->name,
-                'image_url' => $candidate->image_url,
+                'image_url' => asset($candidate->image_url),
                 'is_active' => $candidate->is_active,
                 'scores' => $candidate->getScoresBreakdown(),
                 'created_at' => $candidate->created_at,
@@ -201,7 +202,7 @@ class CandidateController extends Controller
                 'id' => $candidate->id,
                 'candidate_number' => $candidate->candidate_number,
                 'name' => $candidate->name,
-                'image_url' => $candidate->image_url,
+                'image_url' => $candidate->image_url ? asset($candidate->image_url) : null,
                 'has_voted' => $hasVoted,
             ];
         });

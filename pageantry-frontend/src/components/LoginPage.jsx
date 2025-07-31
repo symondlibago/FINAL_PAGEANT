@@ -143,16 +143,6 @@ const LoginPage = () => {
                 )}
               </Button>
             </form>
-
-            <div className="text-center space-y-2">
-              <p className="text-sm text-muted-foreground">
-                Demo Credentials:
-              </p>
-              <div className="text-xs space-y-1 bg-muted/50 p-3 rounded-md">
-                <p><strong>Admin:</strong> admin@pageant.com / password</p>
-                <p><strong>Judge:</strong> judge@pageant.com / password</p>
-              </div>
-            </div>
           </CardContent>
         </Card>
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Environment configuration
-const API_BASE_URL = import.meta.env.VITE_REACT_APP_API_URL || 'http://localhost:8001/api';
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_API_URL || 'http://192.168.137.1:8001/api';
 const REQUEST_TIMEOUT = 30000; // 30 seconds
 
 // Create axios instance with base configuration
